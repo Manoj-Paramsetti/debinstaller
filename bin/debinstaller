@@ -44,48 +44,70 @@ import os
 import sys
 import signal
 
+# Colors
+def _error(text):
+    print('\033[1;31m'+text+'\033[m 1>&2')
+
+def _info(text):
+    print('\033[1;32m'+text+'\033[0m')
+
+def _warning(text):
+    print('\033[1;33m'+text+'\033[0m')
+
+def _question(text):
+    print('\033[1;34m'+text+'\033[0m')
+
+def _success(text):
+    print('\033[1;35m'+text+'\033[0m')
+
+def _header(text):
+    print('\033[1;36m'+text+'\033[0m')
+
+def _listitem(text):
+    print('\033[0;37m'+text+'\033[0m')
+
 def catch_exit(s,f):
-    print("Are you sure to quit the program? This may affect your system [y/n]")
+    _warning("Are you sure to quit the program? This may affect your system [y/n]")
     if(input().lower() in ('y','yes','ye')):
         exit()
 
 signal.signal(signal.SIGINT, catch_exit)
 
 def show_license():
-    print(" =============")
-    print(" |  LICENSE  |")
-    print(" =============")
-    print()
-    print(" MIT License")
-    print(" ")
-    print(" Copyright (c) 2021 Manoj Paramsetti")
-    print(" ")
-    print(" Permission is hereby granted, free of charge, to any person obtaining a copy")
-    print(" of this software and associated documentation files (the \"Software\"), to deal")
-    print(" in the Software without restriction, including without limitation the rights")
-    print(" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell")
-    print(" copies of the Software, and to permit persons to whom the Software is")
-    print(" furnished to do so, subject to the following conditions:")
-    print(" ")
-    print(" The above copyright notice and this permission notice shall be included in all")
-    print(" copies or substantial portions of the Software.")
-    print(" ")
-    print(" THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR")
-    print(" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,")
-    print(" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE")
-    print(" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER")
-    print(" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,")
-    print(" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE")
-    print(" SOFTWARE.")
+    _header(" =============")
+    _header(" |  LICENSE  |")
+    _header(" =============")
+    _header()
+    _header(" MIT License")
+    _header(" ")
+    _header(" Copyright (c) 2021 Manoj Paramsetti")
+    _header(" ")
+    _header(" Permission is hereby granted, free of charge, to any person obtaining a copy")
+    _header(" of this software and associated documentation files (the \"Software\"), to deal")
+    _header(" in the Software without restriction, including without limitation the rights")
+    _header(" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell")
+    _header(" copies of the Software, and to permit persons to whom the Software is")
+    _header(" furnished to do so, subject to the following conditions:")
+    _header(" ")
+    _header(" The above copyright notice and this permission notice shall be included in all")
+    _header(" copies or substantial portions of the Software.")
+    _header(" ")
+    _header(" THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR")
+    _header(" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,")
+    _header(" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE")
+    _header(" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER")
+    _header(" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,")
+    _header(" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE")
+    _header(" SOFTWARE.")
 
 def help():
-    print("")
-    print(" Usage: sudo debinstaller [OPTION] [filename]")
-    print(" ")
-    print(" Options:")
-    print(" --help                    Show this message")
-    print(" --install DEBFILE         Install .deb file")
-    print(" --license                 Show License")
+    _info("")
+    _info(" Usage: sudo debinstaller [OPTION] [filename]")
+    _info(" ")
+    _info(" Options:")
+    _info(" --help                    Show this message")
+    _info(" --install DEBFILE         Install .deb file")
+    _info(" --license                 Show License")
 
 def welcome_logo():
     # It is a welcome logo displayer
@@ -110,7 +132,7 @@ if __name__ == '__main__':
                 filename = sys.argv[2]
                 foldername = filename.replace('.deb', '')
                 os.system('mkdir -p '+foldername)
-                print('Extracting file')
+                _info('Extracting file')
                 os.system(f'ar xf {filename} --output {os.getcwd()}/{foldername}/')
                 os.system(f'mkdir -p {foldername}/data')
                 os.system(f'tar xf {foldername}/data.tar.* -C {foldername}/data')
@@ -118,7 +140,7 @@ if __name__ == '__main__':
                 for datafile in datafiles: 
                 	os.system(f'cp -rf {foldername}/data/{datafile} /')
                 os.system('rm -rf '+foldername)
-                print("Installed")
+                _success("Installed")
             else:
                 help()
         elif (sys.argv[1] == '--license'):
