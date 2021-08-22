@@ -77,7 +77,7 @@ def show_license():
     _header(" =============")
     _header(" |  LICENSE  |")
     _header(" =============")
-    _header()
+    _header("")
     _header(" MIT License")
     _header(" ")
     _header(" Copyright (c) 2021 Manoj Paramsetti")
