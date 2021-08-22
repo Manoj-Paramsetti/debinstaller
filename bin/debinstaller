@@ -46,7 +46,7 @@ import signal
 
 # Colors
 def _error(text):
-    print("\033[1;31m" + text + "\033[m 1>&2")
+    print("\033[1;31m" + text + "\033[m")
 
 
 def _info(text):
@@ -161,18 +161,21 @@ if __name__ == "__main__":
     try:
         if len(sys.argv) == 3:
             if (sys.argv[1] in ("--install", "--it")) and (".deb" in sys.argv[2]):
-                filename = sys.argv[2]
-                foldername = filename.replace(".deb", "")
-                os.system("mkdir -p " + foldername)
-                _info("Extracting file")
-                os.system(f"ar xf {filename} --output {os.getcwd()}/{foldername}/")
-                os.system(f"mkdir -p {foldername}/data")
-                os.system(f"tar xf {foldername}/data.tar.* -C {foldername}/data")
-                datafiles = os.listdir(f"{foldername}/data")
-                for datafile in datafiles:
-                    os.system(f"cp -rf {foldername}/data/{datafile} /")
-                os.system("rm -rf " + foldername)
-                _success("Installed")
+                if os.path.isfile(sys.argv[2]):
+                    filename = sys.argv[2]
+                    foldername = filename.replace(".deb", "")
+                    os.system("mkdir -p " + foldername)
+                    _info("Extracting file")
+                    os.system(f"ar xf {filename} --output {os.getcwd()}/{foldername}/")
+                    os.system(f"mkdir -p {foldername}/data")
+                    os.system(f"tar xf {foldername}/data.tar.* -C {foldername}/data")
+                    datafiles = os.listdir(f"{foldername}/data")
+                    for datafile in datafiles:
+                        os.system(f"cp -rf {foldername}/data/{datafile} /")
+                    os.system("rm -rf " + foldername)
+                    _success("Installed")
+                else:
+                    _error("File not found")
             else:
                 help()
         elif sys.argv[1] == "--license":
