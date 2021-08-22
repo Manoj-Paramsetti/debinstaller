@@ -1,31 +1,4 @@
-# `debinstaller`
-A tool to install `.deb` files in any distro.
-
-
-## Installation for debinstaller
-
-#### Using `wget`
-
-```bash
-$ wget https://raw.githubusercontent.com/Manoj-Paramsetti/debinstaller/main/setup.py
-$ sudo python3 setup.py
-```
-
-#### Using `git`
-
-```bash
-$ git clone https://github.com/Manoj-Paramsetti/debinstaller.git
-```
-
-## Installing deb files using debinstaller
-
-```bash
-$ debinstaller --install debfilename.deb
-```
-
-<hr>
-
-## Need Help with contributing. No issues, We will help you out. 🙋
+# Need Help with contributing. No issues, We will help you out. 🙋
 
 ![GitHub custom open for collaboration](https://img.shields.io/badge/Open%20For-Collaboration-brightgreen?style=for-the-badge)
 
@@ -44,7 +17,7 @@ When contributing to this repository, please first discuss the change you wish t
 
 ## How to Contribute? 💥
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 
 - Take a look at the Existing [Issues](https://github.com/Manoj-Paramsetti/debinstaller/issues) or create your own Issues!
@@ -144,4 +117,4 @@ For major changes, you are welcomed to open an issue about what you would like t
 
 </p>
 
-**Contributing template referred from: [DSC-SIST/Discord-Bot](https://github.com/DSC-SIST/Discord-Bot)**
+**Referred from: [DSC-SIST/Discord-Bot](https://github.com/DSC-SIST/Discord-Bot)**
