@@ -15,12 +15,13 @@ $ sudo python3 setup.py
 
 ```bash
 $ git clone https://github.com/Manoj-Paramsetti/debinstaller.git
+$ sudo python3 setup.py
 ```
 
 ## Installing deb files using debinstaller
 
 ```bash
-$ debinstaller --install debfilename.deb
+$ sudo debinstaller --install debfilename.deb
 ```
 
 <hr>
