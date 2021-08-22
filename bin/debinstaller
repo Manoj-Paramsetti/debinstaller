@@ -9,19 +9,19 @@
 # =============
 
 # MIT License
-# 
+#
 # Copyright (c) 2021 Manoj Paramsetti
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,7 +32,7 @@
 
 
 # Usage: sudo debinstaller [OPTION] [filename]
-# 
+#
 # Options:
 # --help                    Show this message
 # --install DEBFILE         Install .deb file
@@ -46,32 +46,41 @@ import signal
 
 # Colors
 def _error(text):
-    print('\033[1;31m'+text+'\033[m 1>&2')
+    print("\033[1;31m" + text + "\033[m 1>&2")
+
 
 def _info(text):
-    print('\033[1;32m'+text+'\033[0m')
+    print("\033[1;32m" + text + "\033[0m")
+
 
 def _warning(text):
-    print('\033[1;33m'+text+'\033[0m')
+    print("\033[1;33m" + text + "\033[0m")
+
 
 def _question(text):
-    print('\033[1;34m'+text+'\033[0m')
+    print("\033[1;34m" + text + "\033[0m")
+
 
 def _success(text):
-    print('\033[1;35m'+text+'\033[0m')
+    print("\033[1;35m" + text + "\033[0m")
+
 
 def _header(text):
-    print('\033[1;36m'+text+'\033[0m')
+    print("\033[1;36m" + text + "\033[0m")
+
 
 def _listitem(text):
-    print('\033[0;37m'+text+'\033[0m')
+    print("\033[0;37m" + text + "\033[0m")
 
-def catch_exit(s,f):
+
+def catch_exit(s, f):
     _warning("Are you sure to quit the program? This may affect your system [y/n]")
-    if(input().lower() in ('y','yes','ye')):
+    if input().lower() in ("y", "yes", "ye"):
         exit()
 
+
 signal.signal(signal.SIGINT, catch_exit)
+
 
 def show_license():
     _header(" =============")
@@ -82,23 +91,42 @@ def show_license():
     _header(" ")
     _header(" Copyright (c) 2021 Manoj Paramsetti")
     _header(" ")
-    _header(" Permission is hereby granted, free of charge, to any person obtaining a copy")
-    _header(" of this software and associated documentation files (the \"Software\"), to deal")
-    _header(" in the Software without restriction, including without limitation the rights")
-    _header(" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell")
+    _header(
+        " Permission is hereby granted, free of charge, to any person obtaining a copy"
+    )
+    _header(
+        ' of this software and associated documentation files (the "Software"), to deal'
+    )
+    _header(
+        " in the Software without restriction, including without limitation the rights"
+    )
+    _header(
+        " to use, copy, modify, merge, publish, distribute, sublicense, and/or sell"
+    )
     _header(" copies of the Software, and to permit persons to whom the Software is")
     _header(" furnished to do so, subject to the following conditions:")
     _header(" ")
-    _header(" The above copyright notice and this permission notice shall be included in all")
+    _header(
+        " The above copyright notice and this permission notice shall be included in all"
+    )
     _header(" copies or substantial portions of the Software.")
     _header(" ")
-    _header(" THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR")
+    _header(
+        ' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR'
+    )
     _header(" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,")
-    _header(" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE")
+    _header(
+        " FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE"
+    )
     _header(" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER")
-    _header(" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,")
-    _header(" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE")
+    _header(
+        " LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,"
+    )
+    _header(
+        " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE"
+    )
     _header(" SOFTWARE.")
+
 
 def help():
     _info("")
@@ -109,10 +137,12 @@ def help():
     _info(" --install DEBFILE         Install .deb file")
     _info(" --license                 Show License")
 
+
 def welcome_logo():
     # It is a welcome logo displayer
     # NOT ALLOWED TO MODIFY
-    print(""" _____  _____ ____    ___ _   _ ____ _____  _    _     _     _____ ____  
+    print(
+        """ _____  _____ ____    ___ _   _ ____ _____  _    _     _     _____ ____  
  |  _ \\| ____| __ )  |_ _| \\ | / ___|_   _|/ \\  | |   | |   | ____|  _ \\ 
  | | | |  _| |  _ \\   | ||  \\| \\___ \\ | | / _ \\ | |   | |   |  _| | |_) |
  | |_| | |___| |_) |  | || |\\  |___) || |/ ___ \\| |___| |___| |___|  _ < 
@@ -122,30 +152,32 @@ def welcome_logo():
       GitHub Repo: https://github.com/Manoj-Paramsetti/debinstaller
 
                            VERSION: 1.0.1
-        """)
+        """
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     welcome_logo()
     try:
-        if (len(sys.argv)==3):
-            if((sys.argv[1] in ('--install', '--it')) and ('.deb' in sys.argv[2])):
+        if len(sys.argv) == 3:
+            if (sys.argv[1] in ("--install", "--it")) and (".deb" in sys.argv[2]):
                 filename = sys.argv[2]
-                foldername = filename.replace('.deb', '')
-                os.system('mkdir -p '+foldername)
-                _info('Extracting file')
-                os.system(f'ar xf {filename} --output {os.getcwd()}/{foldername}/')
-                os.system(f'mkdir -p {foldername}/data')
-                os.system(f'tar xf {foldername}/data.tar.* -C {foldername}/data')
-                datafiles = os.listdir(f'{foldername}/data')
-                for datafile in datafiles: 
-                	os.system(f'cp -rf {foldername}/data/{datafile} /')
-                os.system('rm -rf '+foldername)
+                foldername = filename.replace(".deb", "")
+                os.system("mkdir -p " + foldername)
+                _info("Extracting file")
+                os.system(f"ar xf {filename} --output {os.getcwd()}/{foldername}/")
+                os.system(f"mkdir -p {foldername}/data")
+                os.system(f"tar xf {foldername}/data.tar.* -C {foldername}/data")
+                datafiles = os.listdir(f"{foldername}/data")
+                for datafile in datafiles:
+                    os.system(f"cp -rf {foldername}/data/{datafile} /")
+                os.system("rm -rf " + foldername)
                 _success("Installed")
             else:
                 help()
-        elif (sys.argv[1] == '--license'):
+        elif sys.argv[1] == "--license":
             show_license()
         else:
             help()
-    except(IndexError, TypeError):
+    except (IndexError, TypeError):
         help()
